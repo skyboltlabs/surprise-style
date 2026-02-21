@@ -3,6 +3,7 @@ import React from 'react';
 import { ArrowRight, ChevronRight, Star } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 import { useApp } from '../context/AppContext';
+import SEO from '../components/SEO';
 
 const Home: React.FC = () => {
   const { products } = useApp();
@@ -10,6 +11,10 @@ const Home: React.FC = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO 
+        title="Curated Homeware & Luxury Decor"
+        description="Discover timeless furniture and artisanal artifacts in the heart of Cape Town. High-end luxury decor hiring and acquisition boutique."
+      />
       {/* Lifestyle Hero */}
       <section className="relative h-[80vh] w-full flex items-center justify-center pt-24">
         <div className="absolute inset-x-0 bottom-0 h-full w-full px-6 md:px-12">

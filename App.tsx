@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { AppProvider } from './context/AppContext';
 import Navbar from './components/Navbar';
 import SidebarCart from './components/SidebarCart';
@@ -99,12 +100,14 @@ const AppContent: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <AppProvider>
-      <Router>
-        <ScrollToTop />
-        <AppContent />
-      </Router>
-    </AppProvider>
+    <HelmetProvider>
+      <AppProvider>
+        <Router>
+          <ScrollToTop />
+          <AppContent />
+        </Router>
+      </AppProvider>
+    </HelmetProvider>
   );
 };
 

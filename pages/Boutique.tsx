@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import ProductCard from '../components/ProductCard';
 import { useApp } from '../context/AppContext';
+import SEO from '../components/SEO';
 
 const CATEGORIES = ['All', 'The Dining Table', 'Grand Entrances', 'Lounge Luxe', 'Floral Architecture'];
 
@@ -33,6 +34,11 @@ const Boutique: React.FC = () => {
 
   return (
     <div className="pt-48 pb-32 px-6 md:px-12 max-w-screen-2xl mx-auto">
+      <SEO 
+        title={`Boutique | ${activeCategory}`}
+        description={`Explore our curated collection of ${activeCategory.toLowerCase()} artifacts. Timeless furniture and artisanal decor for your home.`}
+        url="/boutique"
+      />
       <div className="flex flex-col md:flex-row gap-16">
         {/* Sidebar Filters */}
         <aside className="w-full md:w-64 flex-shrink-0">

@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Minus, Plus, Share2, ArrowLeft, Heart, ShoppingBag, ShieldCheck, Truck, Star, MessageSquare } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { Product, Review } from '../types';
+import SEO from '../components/SEO';
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -49,8 +50,40 @@ const ProductDetail: React.FC = () => {
 
   if (!product) return <div className="h-screen flex items-center justify-center font-playfair italic text-2xl text-[#B4A694]">Gathering artifacts...</div>;
 
+  const productSchema = {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": product.name,
+    "image": product.images,
+    "description": product.description,
+    "brand": {
+      "@type": "Brand",
+      "name": "Surprise by Style"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": window.location.href,
+      "priceCurrency": "ZAR",
+      "price": product.price,
+      "availability": product.isAvailable ? "https://schema.org/InStock" : "https://schema.org/OutOfStock"
+    },
+    "aggregateRating": product.reviews && product.reviews.length > 0 ? {
+      "@type": "AggregateRating",
+      "ratingValue": (product.reviews.reduce((acc, r) => acc + r.rating, 0) / product.reviews.length).toFixed(1),
+      "reviewCount": product.reviews.length
+    } : undefined
+  };
+
   return (
     <div className="pt-32 pb-40 bg-[#F8F7F2]">
+      <SEO 
+        title={product.name}
+        description={product.description}
+        image={product.images[0]}
+        url={`/product/${product.id}`}
+        type="product"
+        schema={productSchema}
+      />
       <div className="px-6 md:px-12 max-w-screen-2xl mx-auto">
         <a href="#/boutique" className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] font-bold mb-16 opacity-60 hover:opacity-100 hover:text-[#B4A694] transition-all">
           <ArrowLeft size={14} /> Back to Collection

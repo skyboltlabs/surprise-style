@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const PROJECTS = [
   { id: 1, title: 'The Constantia Estate', date: 'Spring 2024', image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1200', desc: 'A minimalist overhaul of a heritage wine estate focusing on neutral stone and soft linen textures.' },
@@ -12,6 +13,11 @@ const PROJECTS = [
 const Archive: React.FC = () => {
   return (
     <div className="pt-48 pb-40 bg-[#F8F7F2]">
+      <SEO 
+        title="The Archive | Interior Narratives"
+        description="A visual documentation of spaces we've inhabited. Explore our portfolio of minimalist overhauls and botanical art projects."
+        url="/archive"
+      />
       <div className="px-6 md:px-12 max-w-screen-2xl mx-auto">
         <header className="mb-32 max-w-4xl">
           <span className="text-[10px] uppercase tracking-[0.5em] text-[#B4A694] font-bold mb-6 block">Interior Narratives</span>
