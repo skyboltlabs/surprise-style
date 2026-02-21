@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  --font-playfair: "Playfair Display", serif;
+  --font-inter: "Inter", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-[#F8F7F2] text-[#2D2D2D] font-inter overflow-x-hidden;
+  }
+}
+
+@layer components {
+  .custom-cursor {
+    @apply w-[10px] h-[10px] bg-[#2D2D2D] rounded-full fixed pointer-events-none z-[9999] transition-transform duration-100 ease-out;
+  }
+  
+  .hover-scale {
+    @apply transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] hover:scale-[1.03];
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #F8F7F2;
+}
+::-webkit-scrollbar-thumb {
+  background: #B4A694;
+}

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ShoppingBag, Heart } from 'lucide-react';
+import { ShoppingBag, Heart, Star } from 'lucide-react';
 import { Product } from '../types';
 import { useApp } from '../context/AppContext';
 
@@ -11,6 +11,10 @@ interface Props {
 const ProductCard: React.FC<Props> = ({ product }) => {
   const { addToCart, addToWishlist, wishlist } = useApp();
   const isInWishlist = wishlist.some(i => i.id === product.id);
+
+  const averageRating = product.reviews && product.reviews.length > 0
+    ? product.reviews.reduce((acc, r) => acc + r.rating, 0) / product.reviews.length
+    : null;
 
   return (
     <div className="group flex flex-col h-full bg-white p-4">
@@ -41,6 +45,14 @@ const ProductCard: React.FC<Props> = ({ product }) => {
       <div className="mt-5 flex flex-col items-center text-center">
         <span className="text-[9px] uppercase tracking-[0.3em] text-[#B4A694] mb-1">{product.category}</span>
         <a href={`#/product/${product.id}`} className="font-playfair text-lg text-[#2D2D2D] group-hover:text-[#B4A694] transition-colors">{product.name}</a>
+        
+        {averageRating && (
+          <div className="flex items-center gap-1 mt-1 text-[#B4A694]">
+            <Star size={10} fill="currentColor" />
+            <span className="text-[9px] font-bold tracking-widest">{averageRating.toFixed(1)}</span>
+          </div>
+        )}
+
         <p className="mt-2 text-sm font-medium tracking-wide">R {product.price.toLocaleString()}</p>
       </div>
     </div>

@@ -1,18 +1,19 @@
 
 import React, { useState } from 'react';
 import ProductCard from '../components/ProductCard';
-import { PRODUCTS } from '../constants';
+import { useApp } from '../context/AppContext';
 
 const CATEGORIES = ['All', 'The Dining Table', 'Grand Entrances', 'Lounge Luxe', 'Floral Architecture'];
 
 const Boutique: React.FC = () => {
+  const { products } = useApp();
   const [activeCategory, setActiveCategory] = useState('All');
   const [sortBy, setSortBy] = useState('Featured');
 
   const getSortedProducts = () => {
     let filtered = activeCategory === 'All' 
-      ? [...PRODUCTS] 
-      : PRODUCTS.filter(p => p.category === activeCategory);
+      ? [...products] 
+      : products.filter(p => p.category === activeCategory);
 
     switch (sortBy) {
       case 'Price: Low to High':

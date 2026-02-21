@@ -12,6 +12,10 @@ export const PRODUCTS: Product[] = [
     vision: 'A celebration of imperfection, designed to hold wild Cape florals.',
     images: ['https://images.unsplash.com/photo-1581783898377-1c85bf937427?auto=format&fit=crop&q=80&w=800', 'https://images.unsplash.com/photo-1612196808214-b7e239e5f6b7?auto=format&fit=crop&q=80&w=800'],
     isAvailable: true,
+    reviews: [
+      { id: 'r1', userName: 'Elena V.', rating: 5, comment: 'The texture is even more beautiful in person. A true statement piece.', date: 'January 2024' },
+      { id: 'r2', userName: 'Marcus T.', rating: 4, comment: 'Slightly smaller than expected but the craftsmanship is undeniable.', date: 'December 2023' }
+    ]
   },
   {
     id: '2',
@@ -23,6 +27,9 @@ export const PRODUCTS: Product[] = [
     vision: 'Understated luxury that prioritizes tactile comfort and longevity.',
     images: ['https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&q=80&w=800', 'https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&q=80&w=800'],
     isAvailable: true,
+    reviews: [
+      { id: 'r3', userName: 'Sarah J.', rating: 5, comment: 'The most comfortable chair I have ever owned. The linen is exquisite.', date: 'February 2024' }
+    ]
   },
   {
     id: '3',

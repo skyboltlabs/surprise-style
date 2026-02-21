@@ -1,27 +1,51 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Minus, Plus, Share2, ArrowLeft, Heart, ShoppingBag, ShieldCheck, Truck } from 'lucide-react';
-import { PRODUCTS } from '../constants';
+import { Minus, Plus, Share2, ArrowLeft, Heart, ShoppingBag, ShieldCheck, Truck, Star, MessageSquare } from 'lucide-react';
 import { useApp } from '../context/AppContext';
-import { Product } from '../types';
+import { Product, Review } from '../types';
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { addToCart, addToWishlist, wishlist } = useApp();
+  const { products, addToCart, addToWishlist, wishlist, addReview } = useApp();
   const [product, setProduct] = useState<Product | null>(null);
   const [qty, setQty] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
 
+  // Review form state
+  const [reviewName, setReviewName] = useState('');
+  const [reviewRating, setReviewRating] = useState(5);
+  const [reviewComment, setReviewComment] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const isInWishlist = product ? wishlist.some(i => i.id === product.id) : false;
 
   useEffect(() => {
-    const p = PRODUCTS.find(item => item.id === id);
+    const p = products.find(item => item.id === id);
     if (p) {
         setProduct(p);
     }
     window.scrollTo(0, 0);
-  }, [id]);
+  }, [id, products]);
+
+  const handleReviewSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!product || !reviewName || !reviewComment) return;
+
+    setIsSubmitting(true);
+    // Simulate API delay
+    setTimeout(() => {
+      addReview(product.id, {
+        userName: reviewName,
+        rating: reviewRating,
+        comment: reviewComment,
+      });
+      setReviewName('');
+      setReviewRating(5);
+      setReviewComment('');
+      setIsSubmitting(false);
+    }, 800);
+  };
 
   if (!product) return <div className="h-screen flex items-center justify-center font-playfair italic text-2xl text-[#B4A694]">Gathering artifacts...</div>;
 
@@ -133,6 +157,103 @@ const ProductDetail: React.FC = () => {
                     </div>
                   </div>
               </div>
+          </div>
+        </div>
+
+        {/* Reviews Section */}
+        <div className="mt-40 border-t border-black/5 pt-32">
+          <div className="grid lg:grid-cols-3 gap-20">
+            {/* Review Summary */}
+            <div>
+              <h2 className="font-playfair text-4xl text-[#2D2D2D] mb-8 italic">Client Reflections</h2>
+              <div className="flex items-center gap-4 mb-6">
+                <div className="flex text-[#B4A694]">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={20} fill={i < 4 ? "currentColor" : "none"} />
+                  ))}
+                </div>
+                <span className="text-sm font-medium text-[#2D2D2D]">4.8 out of 5</span>
+              </div>
+              <p className="text-gray-500 font-light text-sm leading-relaxed mb-12">
+                Our pieces are designed to be lived with. Here is how they have settled into the homes of our community.
+              </p>
+              
+              {/* Review Form */}
+              <div className="bg-white p-8 border border-black/5">
+                <h3 className="text-[10px] uppercase tracking-[0.4em] font-bold mb-8 text-[#B4A694]">Share Your Experience</h3>
+                <form onSubmit={handleReviewSubmit} className="space-y-6">
+                  <div>
+                    <label className="text-[9px] uppercase tracking-widest text-gray-400 block mb-2">Your Name</label>
+                    <input 
+                      type="text" 
+                      required
+                      value={reviewName}
+                      onChange={(e) => setReviewName(e.target.value)}
+                      className="w-full bg-transparent border-b border-black/10 py-2 text-sm outline-none focus:border-[#B4A694] transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[9px] uppercase tracking-widest text-gray-400 block mb-2">Rating</label>
+                    <div className="flex gap-2">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <button
+                          key={star}
+                          type="button"
+                          onClick={() => setReviewRating(star)}
+                          className={`transition-colors ${reviewRating >= star ? 'text-[#B4A694]' : 'text-gray-200'}`}
+                        >
+                          <Star size={18} fill={reviewRating >= star ? "currentColor" : "none"} />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-[9px] uppercase tracking-widest text-gray-400 block mb-2">Your Thoughts</label>
+                    <textarea 
+                      required
+                      rows={4}
+                      value={reviewComment}
+                      onChange={(e) => setReviewComment(e.target.value)}
+                      className="w-full bg-transparent border border-black/10 p-3 text-sm outline-none focus:border-[#B4A694] transition-colors resize-none"
+                    />
+                  </div>
+                  <button 
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-[#2D2D2D] text-white text-[10px] uppercase tracking-[0.3em] font-bold py-4 hover:bg-[#B4A694] transition-all disabled:opacity-50"
+                  >
+                    {isSubmitting ? 'Submitting...' : 'Submit Review'}
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            {/* Review List */}
+            <div className="lg:col-span-2 space-y-16">
+              {product.reviews && product.reviews.length > 0 ? (
+                product.reviews.map((review) => (
+                  <div key={review.id} className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+                    <div className="flex justify-between items-start mb-6">
+                      <div>
+                        <h4 className="font-playfair text-xl text-[#2D2D2D] mb-1">{review.userName}</h4>
+                        <span className="text-[9px] uppercase tracking-widest text-gray-400">{review.date}</span>
+                      </div>
+                      <div className="flex text-[#B4A694]">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} size={14} fill={i < review.rating ? "currentColor" : "none"} />
+                        ))}
+                      </div>
+                    </div>
+                    <p className="text-gray-500 font-light leading-relaxed italic">"{review.comment}"</p>
+                  </div>
+                ))
+              ) : (
+                <div className="h-full flex flex-col items-center justify-center text-center py-20 bg-white border border-dashed border-black/10 rounded-lg">
+                  <MessageSquare size={40} className="text-gray-200 mb-6" strokeWidth={1} />
+                  <p className="font-playfair text-xl italic text-gray-400">Be the first to share a narrative about this piece.</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

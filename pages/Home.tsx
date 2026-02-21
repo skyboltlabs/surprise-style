@@ -2,10 +2,11 @@
 import React from 'react';
 import { ArrowRight, ChevronRight, Star } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
-import { PRODUCTS } from '../constants';
+import { useApp } from '../context/AppContext';
 
 const Home: React.FC = () => {
-  const newArrivals = PRODUCTS.slice(0, 4);
+  const { products } = useApp();
+  const newArrivals = products.slice(0, 4);
 
   return (
     <div className="min-h-screen">

@@ -1,8 +1,10 @@
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { Product, CartItem } from '../types';
+import { Product, CartItem, Review } from '../types';
+import { PRODUCTS } from '../constants';
 
 interface AppContextType {
+  products: Product[];
   cart: CartItem[];
   wishlist: Product[];
   isCartOpen: boolean;
@@ -15,11 +17,13 @@ interface AppContextType {
   toggleWishlist: (open?: boolean) => void;
   addToWishlist: (product: Product) => void;
   removeFromWishlist: (id: string) => void;
+  addReview: (productId: string, review: Omit<Review, 'id' | 'date'>) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [products, setProducts] = useState<Product[]>(PRODUCTS);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [wishlist, setWishlist] = useState<Product[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -57,9 +61,26 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     setWishlist((prev) => prev.filter((item) => item.id !== id));
   };
 
+  const addReview = (productId: string, reviewData: Omit<Review, 'id' | 'date'>) => {
+    const newReview: Review = {
+      ...reviewData,
+      id: Math.random().toString(36).substr(2, 9),
+      date: new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
+    };
+
+    setProducts((prev) => 
+      prev.map((p) => 
+        p.id === productId 
+          ? { ...p, reviews: [newReview, ...(p.reviews || [])] } 
+          : p
+      )
+    );
+  };
+
   return (
     <AppContext.Provider
       value={{
+        products,
         cart,
         wishlist,
         isCartOpen,
@@ -72,6 +93,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         toggleWishlist,
         addToWishlist,
         removeFromWishlist,
+        addReview,
       }}
     >
       {children}
