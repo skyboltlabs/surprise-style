@@ -74,15 +74,41 @@ const ProductDetail: React.FC = () => {
     } : undefined
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": window.location.origin
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Boutique",
+        "item": `${window.location.origin}/#/boutique`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": product.name,
+        "item": window.location.href
+      }
+    ]
+  };
+
   return (
     <div className="pt-32 pb-40 bg-[#F8F7F2]">
       <SEO 
         title={product.name}
-        description={product.description}
+        description={`${product.description} Available for purchase or hire in Cape Town.`}
+        keywords={`${product.name}, ${product.category}, luxury furniture Cape Town, deco hiring`}
         image={product.images[0]}
         url={`/product/${product.id}`}
         type="product"
-        schema={productSchema}
+        schemas={[productSchema, breadcrumbSchema]}
       />
       <div className="px-6 md:px-12 max-w-screen-2xl mx-auto">
         <a href="#/boutique" className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] font-bold mb-16 opacity-60 hover:opacity-100 hover:text-[#B4A694] transition-all">

@@ -44,12 +44,33 @@ const Boutique: React.FC = () => {
 
   const sortedProducts = getSortedProducts();
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": window.location.origin
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Boutique",
+        "item": `${window.location.origin}/#/boutique`
+      }
+    ]
+  };
+
   return (
     <div className="pt-48 pb-32 px-6 md:px-12 max-w-screen-2xl mx-auto">
       <SEO 
         title={`Boutique | ${activeCategory}`}
-        description={`Explore our curated collection of ${activeCategory.toLowerCase()} artifacts. Timeless furniture and artisanal decor for your home.`}
+        description={`Explore our curated collection of ${activeCategory.toLowerCase()} artifacts. Timeless furniture and artisanal decor for your home in Cape Town.`}
+        keywords={`${activeCategory}, luxury furniture, boutique decor, Cape Town homeware, artisanal curation`}
         url="/boutique"
+        schemas={[breadcrumbSchema]}
       />
       <div className="flex flex-col md:flex-row gap-16">
         {/* Sidebar Filters */}

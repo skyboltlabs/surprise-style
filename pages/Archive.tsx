@@ -11,12 +11,33 @@ const PROJECTS = [
 ];
 
 const Archive: React.FC = () => {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": window.location.origin
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Archive",
+        "item": `${window.location.origin}/#/archive`
+      }
+    ]
+  };
+
   return (
     <div className="pt-48 pb-40 bg-[#F8F7F2]">
       <SEO 
         title="The Archive | Interior Narratives"
-        description="A visual documentation of spaces we've inhabited. Explore our portfolio of minimalist overhauls and botanical art projects."
+        description="A visual documentation of spaces we've inhabited. Explore our portfolio of minimalist overhauls and botanical art projects in Cape Town."
+        keywords="interior design portfolio, Cape Town decor projects, minimalist interiors, botanical art"
         url="/archive"
+        schemas={[breadcrumbSchema]}
       />
       <div className="px-6 md:px-12 max-w-screen-2xl mx-auto">
         <header className="mb-32 max-w-4xl">

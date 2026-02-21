@@ -9,11 +9,59 @@ const Home: React.FC = () => {
   const { products } = useApp();
   const newArrivals = products.slice(0, 4);
 
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Surprise by Style",
+    "url": window.location.origin,
+    "logo": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=200",
+    "sameAs": [
+      "https://www.instagram.com/surprisebystyle",
+      "https://www.pinterest.com/surprisebystyle"
+    ]
+  };
+
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "FurnitureStore",
+    "name": "Surprise by Style",
+    "image": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=1200",
+    "@id": window.location.origin,
+    "url": window.location.origin,
+    "telephone": "+27210000000",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "12 Bree Street",
+      "addressLocality": "Cape Town",
+      "postalCode": "8001",
+      "addressCountry": "ZA"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -33.9249,
+      "longitude": 18.4241
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "09:00",
+      "closes": "17:00"
+    }
+  };
+
   return (
     <div className="min-h-screen">
       <SEO 
-        title="Curated Homeware & Luxury Decor"
-        description="Discover timeless furniture and artisanal artifacts in the heart of Cape Town. High-end luxury decor hiring and acquisition boutique."
+        title="Curated Homeware & Luxury Decor Cape Town"
+        description="Discover timeless furniture and artisanal artifacts in the heart of Cape Town. High-end luxury decor hiring and acquisition boutique for exceptional spaces."
+        keywords="luxury furniture Cape Town, deco hiring South Africa, interior curation, artisanal homeware, boutique decor hiring, Scandi furniture Cape Town"
+        schemas={[organizationSchema, localBusinessSchema]}
       />
       {/* Lifestyle Hero */}
       <section className="relative h-[80vh] w-full flex items-center justify-center pt-24">
