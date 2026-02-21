@@ -88,6 +88,46 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* Deco Hiring Section */}
+      <section className="py-32 px-6 md:px-12 bg-[#2D2D2D] text-white overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-1/2 h-full opacity-20">
+            <img 
+                src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80&w=1200" 
+                alt="Event Decor" 
+                className="w-full h-full object-cover" 
+            />
+        </div>
+        <div className="max-w-screen-2xl mx-auto relative z-10">
+            <div className="max-w-2xl">
+                <span className="text-[10px] uppercase tracking-[0.5em] text-[#B4A694] font-bold mb-6 block">Event Curation</span>
+                <h2 className="font-playfair text-5xl md:text-7xl mb-10 italic leading-tight">Deco Hiring for Exceptional Spaces</h2>
+                <p className="text-gray-400 font-light text-lg mb-12 leading-relaxed">
+                    Transform your event with our curated collection of artisanal pieces. From editorial-grade table settings to architectural furniture, our hiring service brings the "Surprise by Style" aesthetic to your most important moments.
+                </p>
+                <div className="flex flex-wrap gap-8">
+                    <div className="flex flex-col">
+                        <span className="text-3xl font-playfair text-[#B4A694] mb-2">01</span>
+                        <h4 className="text-[10px] uppercase tracking-widest font-bold mb-2">Curated Selection</h4>
+                        <p className="text-xs text-gray-500">Access to exclusive, hand-picked artifacts.</p>
+                    </div>
+                    <div className="flex flex-col">
+                        <span className="text-3xl font-playfair text-[#B4A694] mb-2">02</span>
+                        <h4 className="text-[10px] uppercase tracking-widest font-bold mb-2">Styling Support</h4>
+                        <p className="text-xs text-gray-500">Expert guidance on creating cohesive atmospheres.</p>
+                    </div>
+                    <div className="flex flex-col">
+                        <span className="text-3xl font-playfair text-[#B4A694] mb-2">03</span>
+                        <h4 className="text-[10px] uppercase tracking-widest font-bold mb-2">Seamless Logistics</h4>
+                        <p className="text-xs text-gray-500">White-glove delivery and collection across the Cape.</p>
+                    </div>
+                </div>
+                <a href="#/boutique?filter=hiring" className="mt-16 inline-block px-12 py-5 border border-white/20 text-white text-[11px] uppercase tracking-[0.4em] font-bold hover:bg-white hover:text-[#2D2D2D] transition-all duration-500">
+                    Explore Hiring Catalog
+                </a>
+            </div>
+        </div>
+      </section>
+
       {/* Brand Values */}
       <section className="py-24 px-6 md:px-12 bg-[#F2F1EC]">
         <div className="max-w-screen-xl mx-auto grid md:grid-cols-3 gap-16 text-center">

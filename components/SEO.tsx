@@ -20,7 +20,7 @@ const SEO: React.FC<SEOProps> = ({
   schema 
 }) => {
   const siteName = 'Surprise by Style';
-  const defaultDescription = 'High-end luxury decor hiring and acquisition boutique based in Cape Town. Premium curation and editorial-grade styling services.';
+  const defaultDescription = 'High-end luxury decor hiring and acquisition boutique based in Cape Town. Premium curation, event hiring, and editorial-grade styling services.';
   const defaultImage = 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=1200';
   const siteUrl = window.location.origin;
 

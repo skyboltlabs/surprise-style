@@ -1,20 +1,32 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import { useApp } from '../context/AppContext';
 import SEO from '../components/SEO';
 
-const CATEGORIES = ['All', 'The Dining Table', 'Grand Entrances', 'Lounge Luxe', 'Floral Architecture'];
+const CATEGORIES = ['All', 'The Dining Table', 'Grand Entrances', 'Lounge Luxe', 'Floral Architecture', 'Available for Hire'];
 
 const Boutique: React.FC = () => {
   const { products } = useApp();
+  const location = useLocation();
   const [activeCategory, setActiveCategory] = useState('All');
   const [sortBy, setSortBy] = useState('Featured');
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const filter = params.get('filter');
+    if (filter === 'hiring') {
+      setActiveCategory('Available for Hire');
+    }
+  }, [location]);
 
   const getSortedProducts = () => {
     let filtered = activeCategory === 'All' 
       ? [...products] 
-      : products.filter(p => p.category === activeCategory);
+      : activeCategory === 'Available for Hire'
+        ? products.filter(p => p.isForHire)
+        : products.filter(p => p.category === activeCategory);
 
     switch (sortBy) {
       case 'Price: Low to High':

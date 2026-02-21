@@ -126,7 +126,15 @@ const ProductDetail: React.FC = () => {
               <div className="mb-10">
                 <span className="text-[10px] uppercase tracking-[0.4em] text-[#B4A694] font-bold mb-4 block">{product.category}</span>
                 <h1 className="font-playfair text-5xl md:text-6xl text-[#2D2D2D] mb-6 leading-tight">{product.name}</h1>
-                <p className="text-3xl font-light tracking-widest text-[#2D2D2D]">R {product.price.toLocaleString()}</p>
+                <div className="flex items-baseline gap-6">
+                  <p className="text-3xl font-light tracking-widest text-[#2D2D2D]">R {product.price.toLocaleString()}</p>
+                  {product.isForHire && (
+                    <div className="flex items-center gap-2 px-3 py-1 bg-[#B4A694]/10 rounded-full">
+                      <span className="text-[9px] uppercase tracking-widest font-bold text-[#B4A694]">Available for Hire</span>
+                      <span className="text-sm font-medium text-[#B4A694]">R {product.hiringPrice?.toLocaleString()} / day</span>
+                    </div>
+                  )}
+                </div>
               </div>
               
               <div className="prose prose-sm max-w-none text-gray-500 font-light leading-relaxed mb-12 space-y-4">

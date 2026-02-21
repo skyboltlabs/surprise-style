@@ -69,8 +69,8 @@ const AppContent: React.FC = () => {
               <h3 className="text-[#B4A694] text-[10px] uppercase tracking-[0.4em] font-bold mb-10">The Studio</h3>
               <ul className="flex flex-col gap-5 text-[10px] uppercase tracking-[0.2em] font-medium text-[#2D2D2D]">
                   <li><a href="#/boutique" className="hover:text-[#B4A694] transition-colors">Shop All</a></li>
+                  <li><a href="#/boutique?filter=hiring" className="hover:text-[#B4A694] transition-colors">Deco Hiring</a></li>
                   <li><a href="#/archive" className="hover:text-[#B4A694] transition-colors">Our Process</a></li>
-                  <li><a href="#/" className="hover:text-[#B4A694] transition-colors">Bespoke Projects</a></li>
                   <li><a href="#/" className="hover:text-[#B4A694] transition-colors">Contact</a></li>
               </ul>
             </div>

@@ -12,6 +12,8 @@ export interface Product {
   name: string;
   category: 'The Dining Table' | 'Grand Entrances' | 'Lounge Luxe' | 'Floral Architecture';
   price: number;
+  hiringPrice?: number;
+  isForHire?: boolean;
   description: string;
   materiality: string;
   vision: string;

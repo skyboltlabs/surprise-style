@@ -43,7 +43,12 @@ const ProductCard: React.FC<Props> = ({ product }) => {
 
       {/* Info Section */}
       <div className="mt-5 flex flex-col items-center text-center">
-        <span className="text-[9px] uppercase tracking-[0.3em] text-[#B4A694] mb-1">{product.category}</span>
+        <div className="flex items-center gap-2 mb-1">
+          <span className="text-[9px] uppercase tracking-[0.3em] text-[#B4A694]">{product.category}</span>
+          {product.isForHire && (
+            <span className="text-[8px] px-1.5 py-0.5 bg-[#B4A694]/10 text-[#B4A694] font-bold uppercase tracking-widest rounded-sm">Hire</span>
+          )}
+        </div>
         <a href={`#/product/${product.id}`} className="font-playfair text-lg text-[#2D2D2D] group-hover:text-[#B4A694] transition-colors">{product.name}</a>
         
         {averageRating && (

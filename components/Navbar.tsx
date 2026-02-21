@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
             <a href="#/boutique" className="hover:text-[#B4A694] transition-colors">Living</a>
             <a href="#/boutique" className="hover:text-[#B4A694] transition-colors">Dining</a>
             <a href="#/boutique" className="hover:text-[#B4A694] transition-colors">Decor</a>
-            <a href="#/boutique" className="hover:text-[#B4A694] transition-colors">New Arrivals</a>
+            <a href="#/boutique?filter=hiring" className="hover:text-[#B4A694] transition-colors">Hiring</a>
             <a href="#/archive" className="hover:text-[#B4A694] transition-colors">The Archive</a>
           </div>
         </div>
@@ -75,6 +75,7 @@ const Navbar: React.FC = () => {
           <div className="md:hidden bg-white h-screen fixed inset-0 z-[60] p-10 flex flex-col items-center justify-center gap-8 animate-in slide-in-from-right duration-300">
              <a href="#/" onClick={() => setIsMobileMenuOpen(false)} className="font-playfair text-3xl italic">Home</a>
              <a href="#/boutique" onClick={() => setIsMobileMenuOpen(false)} className="font-playfair text-3xl italic">Boutique</a>
+             <a href="#/boutique?filter=hiring" onClick={() => setIsMobileMenuOpen(false)} className="font-playfair text-3xl italic">Hiring</a>
              <a href="#/archive" onClick={() => setIsMobileMenuOpen(false)} className="font-playfair text-3xl italic">Archive</a>
              <button onClick={() => setIsMobileMenuOpen(false)} className="mt-12 text-[10px] uppercase tracking-[0.3em] font-bold border-b border-black">Close</button>
           </div>
